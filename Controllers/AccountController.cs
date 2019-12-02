@@ -471,7 +471,7 @@ namespace FinancialPortal.Controllers
                 }
                 AddErrors(result);
             }
-            return View(invitationvm);
+            return View();
         }
 
         protected override void Dispose(bool disposing)
