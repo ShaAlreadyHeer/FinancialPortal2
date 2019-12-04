@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinancialPortal.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FinancialPortal.Controllers
 {
@@ -50,7 +51,10 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = db.Users.Find(User.Identity.GetUserId());
+                household.OwnerUserId = User.Identity.GetUserId();
                 household.Created = DateTime.Now;
+                user.Household = household;
                 db.Households.Add(household);
                 db.SaveChanges();
                 return RedirectToAction("Index");

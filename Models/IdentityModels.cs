@@ -19,15 +19,19 @@ namespace FinancialPortal.Models
         public string DisplayName { get; set; }
         public string AvatarPath { get; set; }
         public int? HouseholdId { get; set; }
+        public virtual Household Household {get;set;}
+        public virtual BankAccount BankAccount { get; set; }
 
         //Children
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<Budget> Budgets { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<BankAccount> BankAccounts { get; set; }
+        public virtual ICollection<Household> Households { get; set; }
 
         public ApplicationUser()
         {
+            Households = new HashSet<Household>();
             Transactions = new HashSet<Transaction>();
             Budgets = new HashSet<Budget>();
             Notifications = new HashSet<Notification>();

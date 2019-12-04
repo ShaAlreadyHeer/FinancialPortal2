@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BankAccountsController.cs" />
     <Compile Include="Controllers\BudgetItemsController.cs" />
     <Compile Include="Controllers\BudgetsController.cs" />
@@ -183,7 +184,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperClass.cs" />
-    <Compile Include="Helpers\InvitationHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -195,6 +195,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\WidgetView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -238,6 +239,7 @@
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chartjs.min.js" />
+    <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-jvectormap.js" />
@@ -335,6 +337,9 @@
     <Content Include="Scripts\now-ui-dashboard.js.map" />
     <Content Include="Views\Home\EditProfile.cshtml" />
     <Content Include="private.config" />
+    <Content Include="Views\Account\AcceptInvitation.cshtml" />
+    <Content Include="Views\Admin\ManageHouseholdUsers.cshtml" />
+    <Content Include="Views\Account\RegisterHouseholdInvitation.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

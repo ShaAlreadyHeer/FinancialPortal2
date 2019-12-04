@@ -43,7 +43,7 @@ namespace FinancialPortal.Controllers
         public ActionResult Create()
         {
             var houseId = db.Users.Find(User.Identity.GetUserId()).HouseholdId ?? 0;
-            if (houseId != 0)
+            if (houseId == 0)
             {
                 return RedirectToAction("Login", "Account");
             }

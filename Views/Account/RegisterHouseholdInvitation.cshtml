@@ -1,0 +1,329 @@
+﻿@model FinancialPortal.Models.LoginRegisterViewModel
+
+
+@{
+    ViewBag.Title = "RegisterHouseholdInvitation";
+    Layout = null;
+
+}
+
+
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Images/apple-icon.png">
+    <link rel="icon" type="image/png" href="~/Images/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        @ViewBag.Title
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- CSS Files -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/now-ui-dashboard.css?v=1.4.1" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/Content/demo.css" rel="stylesheet" />
+</head>
+
+
+<div class="main-panel" id="main-panel">
+    <div class="main-panel" id="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <a class="navbar-brand" href="#pablo">Wizard</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <form>
+                        <div class="input-group no-border">
+                            <input type="text" value="" class="form-control" placeholder="Search...">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#pablo">
+                                <i class="now-ui-icons media-2_sound-wave"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Stats</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="now-ui-icons location_world"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Some Actions</span>
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#pablo">
+                                <i class="now-ui-icons users_single-02"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Account</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="panel-header panel-header-sm">
+        </div>
+        <div class="content">
+            <div class="col-md-10 mr-auto ml-auto">
+                <!--      Wizard container        -->
+                <div class="wizard-container">
+                    <div class="card card-wizard" data-color="primary" id="wizardProfile">
+                        <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                        <div class="card-header text-center" data-background-color="orange">
+                            <h3 class="card-title">
+                                Register!
+                            </h3>
+                            <h3 class="description">
+                                This information will let us know more about you.
+                            </h3>
+                            <div class="wizard-navigation">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#register" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+                                            <i class="now-ui-icons users_circle-08"></i> Account
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#bankaccount" data-toggle="tab" role="tab" aria-controls="account" aria-selected="false">
+                                            <i class="now-ui-icons ui-1_settings-gear-63"></i> Link A Bank
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#address" data-toggle="tab"  role="tab" aria-controls="address" aria-selected="false">
+                                            <i class="now-ui-icons ui-1_email-85"></i> Address
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane show active" id="register">
+                                    <h5 class="info-text">Let's start with registering an account!</h5>
+                                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "Multipath/form-data" }))
+                                    {
+                                        <div class="row justify-content-center">
+                                            <div class="col-sm-4">
+                                                <div class="picture-container">
+                                                    <div class="picture">
+                                                        <img src="~/Images/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="" />
+                                                        <input type="file" id="wizard-picture">
+                                                    </div>
+                                                    <h6 class="description">Choose Picture</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="input-group form-control-lg">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="now-ui-icons users_circle-08"></i>
+                                                        </div>
+                                                    </div>
+                                                    @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                                    @Html.TextBoxFor(m => m.RegisterVM.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                                                </div>
+                                                <div class="input-group form-control-lg">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="now-ui-icons text_caps-small"></i>
+                                                        </div>
+                                                    </div>
+                                                    @Html.TextBoxFor(m => m.RegisterVM.DisplayName, new { @class = "form-control", placeholder = "Display Name" })
+                                                    @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", placeholder = "Email Address" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 mt-3">
+                                                <div class="input-group form-control-lg">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="now-ui-icons text_caps-small"></i>
+                                                        </div>
+                                                    </div>
+                                                    @Html.TextBoxFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Password" })
+                                                    @Html.TextBoxFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                @*<div class="tab-pane fade" id="bankaccount">
+                                    <h5 class="info-text"> What are you doing? (checkboxes) </h5>
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-10">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox">
+                                                        <input type="checkbox" name="jobb" value="Design">
+                                                        <div class="icon">
+                                                            <i class="now-ui-icons design-2_ruler-pencil"></i>
+                                                        </div>
+                                                        <h6>Design</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox">
+                                                        <input type="checkbox" name="jobb" value="Code">
+                                                        <div class="icon">
+                                                            <i class="now-ui-icons business_bulb-63"></i>
+                                                        </div>
+                                                        <h6>Code</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="choice" data-toggle="wizard-checkbox">
+                                                        <input type="checkbox" name="jobb" value="Develop">
+                                                        <div class="icon">
+                                                            <i class="now-ui-icons tech_tv"></i>
+                                                        </div>
+                                                        <h6>Develop</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="address">
+                                    <div class="row justify-content-center">
+                                        <div class="col-sm-12">
+                                            <h5 class="info-text"> Are you living in a nice area? </h5>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="form-group">
+                                                <label>Street Name</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Street No.</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <select class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Single Select">
+                                                    <option value="Afghanistan"> Afghanistan </option>
+                                                    <option value="Albania"> Albania </option>
+                                                    <option value="Algeria"> Algeria </option>
+                                                    <option value="American Samoa"> American Samoa </option>
+                                                    <option value="Andorra"> Andorra </option>
+                                                    <option value="Angola"> Angola </option>
+                                                    <option value="Anguilla"> Anguilla </option>
+                                                    <option value="Antarctica"> Antarctica </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="pull-right">
+                                <input type='button' class='btn btn-next btn-fill btn-rose btn-wd'/>
+                                <input type='button' class='btn btn-finish btn-fill btn-rose btn-wd' />
+                            </div>
+                            <div class="pull-left">
+                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- wizard container -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--   Core JS Files   -->
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/popper.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/perfect-scrollbar.jquery.min.js"></script>
+<script src="~/Scripts/moment.min.js"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="~/Scripts/bootstrap-switch.js"></script>
+<!--  Plugin for Sweet Alert -->
+<script src="~/Scripts/sweetalert2.min.js"></script>
+<!-- Forms Validations Plugin -->
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+<script src="~/Scripts/jquery.bootstrap-wizard.js"></script>
+<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<script src="~/Scripts/bootstrap-selectpicker.js"></script>
+<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+<script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+<!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+<script src="~/Scripts/bootstrap-tagsinput.js"></script>
+<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<script src="~/Scripts/jasny-bootstrap.min.js"></script>
+<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+<script src="~/Scripts/fullcalendar.min.js"></script>
+<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+<script src="~/Scripts/jquery-jvectormap.js"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="~/Scripts/nouislider.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="~/Scripts/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="~/Scripts/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="~/Scripts/now-ui-dashboard.min.js?v=1.4.1" type="text/javascript"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="~/Scripts/demo.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initialise the wizard
+        demo.initNowUiWizard();
+        setTimeout(function () {
+            $('.card.card-wizard').addClass('active');
+        }, 600);
+    });
+</script>
+
+

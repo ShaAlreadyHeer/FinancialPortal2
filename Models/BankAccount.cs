@@ -18,7 +18,6 @@ namespace FinancialPortal.Models
 
         public virtual Household Household { get; set; }
         public virtual ApplicationUser Owner { get; set; }
-
         public virtual ICollection<Transaction> Transactions { get; set; }
 
         public BankAccount()

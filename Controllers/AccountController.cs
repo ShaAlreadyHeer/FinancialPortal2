@@ -55,6 +55,14 @@ namespace FinancialPortal.Controllers
             }
         }
 
+        //GET: /Account/HouseholdInvitation
+        [AllowAnonymous]
+        public ActionResult RegisterHouseholdInvitation(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -459,8 +467,8 @@ namespace FinancialPortal.Controllers
                 var result = await UserManager.CreateAsync(user, invitationvm.Password);
                 if(result.Succeeded)
                 {
-                    var sentInvitation = db.Invitations.Find(invitationvm.Id);
-                    sentInvitation.IsValid = false;
+                    //var sentInvitation = db.Invitations.Find(invitationvm.Id);
+                    //sentInvitation.IsValid = false;
 
                     roleHelper.AddUserToRole(user.Id, "Member");
 

@@ -101,7 +101,7 @@ namespace FinancialPortal.Models
 
     }
 
-    public class AcceptInvitationViewModel: RegisterViewModel
+    public class AcceptInvitationViewModel:RegisterViewModel
     {
         public int Id { get; set; }
         public Guid Code { get; set; }
@@ -145,6 +145,16 @@ namespace FinancialPortal.Models
         {
             LoginVM = new LoginViewModel();
             RegisterVM = new RegisterViewModel();
+        }
+    }
+
+    public class UserHouseholdListViewModel
+    {
+        public string Name { get; set; }
+        public List<string> HouseholdNames { get; set; }
+        public UserHouseholdListViewModel()
+        {
+            HouseholdNames = new List<string>();
         }
     }
 }

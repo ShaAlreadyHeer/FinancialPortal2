@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -60,6 +61,51 @@ namespace FinancialPortal.Helpers
         {
             var user = db.Users.Find(id);
             return user.FirstName;
+        }
+
+        public bool IsUserOnHousehold(string userId, int householdId)
+        {
+            var house = db.Households.Find(householdId);
+            var flag = house.Users.Any(u => u.Id == userId);
+            return (flag);
+        }
+
+        public void AddUserToHousehold(string userId, int householdId)
+        {
+            if (!IsUserOnHousehold(userId, householdId))
+            {
+                Household house = db.Households.Find(householdId); var newUser = db.Users.Find(userId);
+
+                house.Users.Add(newUser); db.SaveChanges();
+            }
+        }
+
+        public ICollection<Household> ListUserHouseholds(string userId)
+        {
+            ApplicationUser user = db.Users.Find(userId);
+
+            var households = user.Households.ToList();
+            return (households);
+        }
+
+        public void RemoveUserFromHousehold(string userId, int projectId)
+        {
+            if (IsUserOnHousehold(userId, projectId))
+            {
+                Household proj = db.Households.Find(projectId);
+                var delUser = db.Users.Find(userId);
+                proj.Users.Remove(delUser);
+                db.Entry(proj).State = EntityState.Modified;
+            }
+        }
+        public ICollection<ApplicationUser> UsersOnHousehold(int projectId)
+        {
+            return db.Households.Find(projectId).Users;
+        }
+
+        public ICollection<ApplicationUser> UsersNotOnHousehold(int projectId)
+        {
+            return db.Users.Where(u => u.Households.All(p => p.Id != projectId)).ToList();
         }
     }
 }
