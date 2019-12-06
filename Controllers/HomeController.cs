@@ -14,6 +14,7 @@ namespace FinancialPortal.Controllers
 
         public ActionResult Index()
         {
+
             return View();
         }
 

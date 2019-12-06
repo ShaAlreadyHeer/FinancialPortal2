@@ -101,7 +101,7 @@ namespace FinancialPortal.Models
 
     }
 
-    public class AcceptInvitationViewModel:RegisterViewModel
+    public class AcceptInvitationViewModel:LoginRegisterViewModel
     {
         public int Id { get; set; }
         public Guid Code { get; set; }

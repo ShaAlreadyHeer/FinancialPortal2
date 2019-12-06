@@ -57,10 +57,32 @@ namespace FinancialPortal.Controllers
 
         //GET: /Account/HouseholdInvitation
         [AllowAnonymous]
-        public ActionResult RegisterHouseholdInvitation(string returnUrl)
+        public ActionResult RegisterHouseholdInvitation(string recipientEmail, string code)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            var realGuid = Guid.Parse(code);
+            var invitation = db.Invitations.FirstOrDefault(i => i.RecipientEmail == recipientEmail && i.Code == realGuid);
+
+            if (invitation == null)
+            {
+                return View("NotFoundError", invitation);
+            }
+
+            var expirationDate = invitation.Created.AddDays(invitation.TTL);
+            if (invitation.IsValid && DateTime.Now < expirationDate)
+            {
+                var houseHoldName = db.Households.Find(invitation.HouseholdId).Name;
+                ViewBag.Greeting = $"<center> Thank you for accepting my invitation to join {houseHoldName}.</center><br>";
+
+                var invitationVm = new AcceptInvitationViewModel
+                {
+                    Id = invitation.Id,
+                    Code = realGuid,
+                    HouseholdId = invitation.HouseholdId
+                };
+                return View(invitationVm);
+            }
+            //Viewbag.Expire = "Your invitation expired!";
+            return View("AcceptError", invitation);
         }
 
         //
@@ -418,35 +440,8 @@ namespace FinancialPortal.Controllers
             return View();
         }
 
-        public ActionResult AcceptInvitation(string recipientEmail, string code)
-        {
-            var realGuid = Guid.Parse(code);
-            var invitation = db.Invitations.FirstOrDefault(i => i.RecipientEmail == recipientEmail && i.Code == realGuid);
-
-            if (invitation == null)
-            {
-                return View("NotFoundError", invitation);
-            }
-
-            var expirationDate = invitation.Created.AddDays(invitation.TTL);
-            if(invitation.IsValid && DateTime.Now < expirationDate)
-            {
-                var houseHoldName = db.Households.Find(invitation.HouseholdId).Name;
-                ViewBag.Greeting = $"<center> Thank you for accepting my invitation to join {houseHoldName}.</center><br>";
-
-                var invitationVm = new AcceptInvitationViewModel
-                {
-                    Id = invitation.Id,
-                    Email = recipientEmail,
-                    Code = realGuid,
-                    HouseholdId = invitation.HouseholdId
-                };
-                return View(invitationVm);
-            }
-            //Viewbag.Expire = "Your invitation expired!";
-            return View("AcceptError", invitation);
-        }
         
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AcceptInvitation(AcceptInvitationViewModel invitationvm)
@@ -455,16 +450,16 @@ namespace FinancialPortal.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    FirstName = invitationvm.FirstName,
-                    LastName = invitationvm.LastName,
-                    DisplayName = invitationvm.DisplayName,
-                    UserName = invitationvm.Email,
-                    Email = invitationvm.Email,
+                    FirstName = invitationvm.RegisterVM.FirstName,
+                    LastName = invitationvm.RegisterVM.LastName,
+                    DisplayName = invitationvm.RegisterVM.DisplayName,
+                    UserName = invitationvm.RegisterVM.Email,
+                    Email = invitationvm.RegisterVM.Email,
                     AvatarPath = "/Avatars/default_user.png",
                     HouseholdId = invitationvm.HouseholdId
                 };
 
-                var result = await UserManager.CreateAsync(user, invitationvm.Password);
+                var result = await UserManager.CreateAsync(user, invitationvm.RegisterVM.Password);
                 if(result.Succeeded)
                 {
                     //var sentInvitation = db.Invitations.Find(invitationvm.Id);
@@ -474,8 +469,8 @@ namespace FinancialPortal.Controllers
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    db.SaveChanges();
                     return RedirectToAction("Index", "Home");
-
                 }
                 AddErrors(result);
             }

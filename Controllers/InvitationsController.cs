@@ -56,7 +56,7 @@ namespace FinancialPortal.Controllers
         }
 
         // POST: Invitations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from over-posting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -72,7 +72,7 @@ namespace FinancialPortal.Controllers
 
                 await invitation.EmailInvitation();
 
-                return RedirectToAction("Dashboard", "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(invitation);

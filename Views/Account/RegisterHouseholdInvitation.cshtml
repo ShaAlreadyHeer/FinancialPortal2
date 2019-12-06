@@ -1,10 +1,9 @@
-﻿@model FinancialPortal.Models.LoginRegisterViewModel
+﻿@model FinancialPortal.Models.AcceptInvitationViewModel
 
 
 @{
     ViewBag.Title = "RegisterHouseholdInvitation";
     Layout = null;
-
 }
 
 
@@ -110,157 +109,67 @@
                             <h3 class="description">
                                 This information will let us know more about you.
                             </h3>
-                            <div class="wizard-navigation">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" href="#register" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
-                                            <i class="now-ui-icons users_circle-08"></i> Account
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#bankaccount" data-toggle="tab" role="tab" aria-controls="account" aria-selected="false">
-                                            <i class="now-ui-icons ui-1_settings-gear-63"></i> Link A Bank
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#address" data-toggle="tab"  role="tab" aria-controls="address" aria-selected="false">
-                                            <i class="now-ui-icons ui-1_email-85"></i> Address
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                         <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane show active" id="register">
-                                    <h5 class="info-text">Let's start with registering an account!</h5>
-                                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "Multipath/form-data" }))
-                                    {
-                                        <div class="row justify-content-center">
-                                            <div class="col-sm-4">
-                                                <div class="picture-container">
-                                                    <div class="picture">
-                                                        <img src="~/Images/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="" />
-                                                        <input type="file" id="wizard-picture">
-                                                    </div>
-                                                    <h6 class="description">Choose Picture</h6>
+                            <div class="tab-pane show active" id="register">
+                                <h5 class="info-text">Let's start with registering an account!</h5>
+                                @using (Html.BeginForm("AcceptInvitation", "Account", FormMethod.Post, new { enctype = "Multipath/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(m => m.HouseholdId)
+                                    <div class="row justify-content-center">
+                                        <div class="col-sm-4">
+                                            <div class="picture-container">
+                                                <div class="picture">
+                                                    <img src="~/Images/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="" />
+                                                    <input type="file" id="wizard-picture">
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="input-group form-control-lg">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="now-ui-icons users_circle-08"></i>
-                                                        </div>
-                                                    </div>
-                                                    @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "form-control", placeholder = "First Name" })
-                                                    @Html.TextBoxFor(m => m.RegisterVM.LastName, new { @class = "form-control", placeholder = "Last Name" })
-                                                </div>
-                                                <div class="input-group form-control-lg">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="now-ui-icons text_caps-small"></i>
-                                                        </div>
-                                                    </div>
-                                                    @Html.TextBoxFor(m => m.RegisterVM.DisplayName, new { @class = "form-control", placeholder = "Display Name" })
-                                                    @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", placeholder = "Email Address" })
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-10 mt-3">
-                                                <div class="input-group form-control-lg">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="now-ui-icons text_caps-small"></i>
-                                                        </div>
-                                                    </div>
-                                                    @Html.TextBoxFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Password" })
-                                                    @Html.TextBoxFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
-                                                </div>
+                                                @Html.DisplayFor(m => m.HouseholdId)
+                                                @*@Html.DisplayFor(m => m.Code.ToString)*@
+                                                <h6 class="description">Choose Picture</h6>
                                             </div>
                                         </div>
-                                    }
-                                </div>
-                                @*<div class="tab-pane fade" id="bankaccount">
-                                    <h5 class="info-text"> What are you doing? (checkboxes) </h5>
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-10">
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-checkbox">
-                                                        <input type="checkbox" name="jobb" value="Design">
-                                                        <div class="icon">
-                                                            <i class="now-ui-icons design-2_ruler-pencil"></i>
-                                                        </div>
-                                                        <h6>Design</h6>
+                                        <div class="col-sm-6">
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons users_circle-08"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-checkbox">
-                                                        <input type="checkbox" name="jobb" value="Code">
-                                                        <div class="icon">
-                                                            <i class="now-ui-icons business_bulb-63"></i>
-                                                        </div>
-                                                        <h6>Code</h6>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <div class="choice" data-toggle="wizard-checkbox">
-                                                        <input type="checkbox" name="jobb" value="Develop">
-                                                        <div class="icon">
-                                                            <i class="now-ui-icons tech_tv"></i>
-                                                        </div>
-                                                        <h6>Develop</h6>
-                                                    </div>
-                                                </div>
+                                                @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                                @Html.TextBoxFor(m => m.RegisterVM.LastName, new { @class = "form-control", placeholder = "Last Name" })
                                             </div>
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons text_caps-small"></i>
+                                                    </div>
+                                                </div>
+                                                @Html.TextBoxFor(m => m.RegisterVM.DisplayName, new { @class = "form-control", placeholder = "Display Name" })
+                                                @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "form-control", placeholder = "Email Address" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 mt-3">
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons text_caps-small"></i>
+                                                    </div>
+                                                </div>
+                                                @Html.TextBoxFor(m => m.RegisterVM.Password, new { @class = "form-control", placeholder = "Password" })
+                                                @Html.TextBoxFor(m => m.RegisterVM.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <button type="submit" value="Register" class="btn btn-success">Register</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="address">
-                                    <div class="row justify-content-center">
-                                        <div class="col-sm-12">
-                                            <h5 class="info-text"> Are you living in a nice area? </h5>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="form-group">
-                                                <label>Street Name</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="form-group">
-                                                <label>Street No.</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <div class="form-group">
-                                                <label>Country</label>
-                                                <select class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Single Select">
-                                                    <option value="Afghanistan"> Afghanistan </option>
-                                                    <option value="Albania"> Albania </option>
-                                                    <option value="Algeria"> Algeria </option>
-                                                    <option value="American Samoa"> American Samoa </option>
-                                                    <option value="Andorra"> Andorra </option>
-                                                    <option value="Angola"> Angola </option>
-                                                    <option value="Anguilla"> Anguilla </option>
-                                                    <option value="Antarctica"> Antarctica </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+                                }
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="pull-right">
-                                <input type='button' class='btn btn-next btn-fill btn-rose btn-wd'/>
+                                <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' />
                                 <input type='button' class='btn btn-finish btn-fill btn-rose btn-wd' />
                             </div>
                             <div class="pull-left">
@@ -298,7 +207,7 @@
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
 <script src="~/Scripts/bootstrap-tagsinput.js"></script>
-<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<!-- Plugin for File upload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
 <script src="~/Scripts/jasny-bootstrap.min.js"></script>
 <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
 <script src="~/Scripts/fullcalendar.min.js"></script>

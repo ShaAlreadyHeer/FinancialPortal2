@@ -22,13 +22,13 @@ namespace FinancialPortal.Controllers
         }
 
         // GET: Households/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Household household = db.Households.Find(id);
+            Household household = db.Households.Include(h => h.OwnerUser).FirstOrDefault(h => h.Id == id);
             if (household == null)
             {
                 return HttpNotFound();

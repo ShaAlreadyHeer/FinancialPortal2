@@ -1,41 +1,43 @@
 ﻿@model FinancialPortal.Models.Household
 
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
+<div class="main-panel">
+    <h2>Details</h2>
     <h4>Household</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Greeting)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Greeting)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Created)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Created)
         </dd>
-
     </dl>
+    @Model.OwnerUser.DisplayName
+    @*@foreach (var model in Model.OwnerUserId)
+        {
+            @Html.Display(model.DisplayName)
+        }*@
 </div>
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
