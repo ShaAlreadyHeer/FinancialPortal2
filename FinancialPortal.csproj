@@ -340,6 +340,7 @@
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
     <Content Include="Views\Admin\ManageHouseholdUsers.cshtml" />
     <Content Include="Views\Account\RegisterHouseholdInvitation.cshtml" />
+    <Content Include="Views\Households\ExitDenied.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

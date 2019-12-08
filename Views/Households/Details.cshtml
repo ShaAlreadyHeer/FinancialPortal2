@@ -1,6 +1,7 @@
 ﻿@model FinancialPortal.Models.Household
 
 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -30,15 +31,17 @@
             @Html.DisplayFor(model => model.Created)
         </dd>
     </dl>
-    @Model.OwnerUser.DisplayName
-    @*@foreach (var model in Model.OwnerUserId)
-        {
-            @Html.Display(model.DisplayName)
-        }*@
+    @*@Model.Users.ToList();*@
+
+
+    @*@foreach (var user in Model.myUsers)
+    {
+        @Html.DisplayText(user.DisplayName);     
+    }*@
 </div>
 
 
-<p>
+@*<p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@

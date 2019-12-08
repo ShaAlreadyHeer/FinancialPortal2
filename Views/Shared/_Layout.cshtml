@@ -1,4 +1,7 @@
-﻿<!--
+﻿@using FinancialPortal.Helpers
+@using FinancialPortal.Models
+@using Microsoft.AspNet.Identity
+<!--
 
 =========================================================
 * Now UI Dashboard PRO - v1.4.1
@@ -14,6 +17,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,14 +42,21 @@
 </head>
 
 <body class=" sidebar-mini ">
+    @{
+        var roleHelper = new HelperClass();
+        var userId = User.Identity.GetUserId();
+        var myRole = roleHelper.ListUserRoles(userId).FirstOrDefault();
+        var db = new ApplicationDbContext();
+        var user = db.Users.Find(userId);
+    }
     <div class="wrapper ">
         <div class="sidebar" data-color="orange">
             <!--
-            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-        -->
+                Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+            -->
             <div class="logo">
                 <a href="" class="simple-text logo-mini">
-                    @*@User.Identity.Name*@
+                    @User.Identity.Name
                 </a>
                 <a href="" class="simple-text logo-normal">
                 </a>
@@ -133,12 +145,15 @@
                                         <span class="sidebar-normal"> Invite Users </span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="../examples/components/panels.html">
-                                        <span class="sidebar-mini-icon">P</span>
-                                        <span class="sidebar-normal"> Panels </span>
-                                    </a>
-                                </li>
+                                @*@if (roleHelper.IsUserOnHousehold(userId))
+                                {*@
+                                    <li>
+                                        <a href=@Url.Action("LeaveAsync","Households")>
+                                            <span class="sidebar-mini-icon">LH</span>
+                                            <span class="sidebar-normal"> Leave Household </span>
+                                        </a>
+                                    </li>
+                                @*}*@
                                 <li>
                                     <a href="../examples/components/sweet-alert.html">
                                         <span class="sidebar-mini-icon">SA</span>
@@ -177,15 +192,15 @@
                         <div class="collapse " id="formsExamples">
                             <ul class="nav">
                                 <li>
-                                    <a href="../examples/forms/regular.html">
-                                        <span class="sidebar-mini-icon">RF</span>
-                                        <span class="sidebar-normal"> Regular Forms </span>
+                                    <a href=@Url.Action("Create","BankAccounts")>
+                                        <span class="sidebar-mini-icon">B</span>
+                                        <span class="sidebar-normal"> Create Bank Account </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="../examples/forms/extended.html">
-                                        <span class="sidebar-mini-icon">EF</span>
-                                        <span class="sidebar-normal"> Extended Forms </span>
+                                    <a href=@Url.Action("Index", "BankAccounts")>
+                                        <span class="sidebar-mini-icon">B</span>
+                                        <span class="sidebar-normal"> Your Bank Accounts </span>
                                     </a>
                                 </li>
                                 <li>
@@ -237,57 +252,57 @@
                 </ul>
             </div>
         </div>
-            @RenderBody()
+        @RenderBody()
     </div>
-        <!--   Core JS Files   -->
-        <script src="~/Scripts/jquery.min.js"></script>
-        <script src="~/Scripts/popper.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <script src="~/Scripts/perfect-scrollbar.jquery.min.js"></script>
-        <script src="~/Scripts/moment.min.js"></script>
-        <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-        <script src="~/Scripts/bootstrap-switch.js"></script>
-        <!--  Plugin for Sweet Alert -->
-        <script src="~/Scripts/sweetalert2.min.js"></script>
-        <!-- Forms Validations Plugin -->
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-        <script src="~/Scripts/jquery.bootstrap-wizard.js"></script>
-        <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-        <script src="~/Scripts/bootstrap-selectpicker.js"></script>
-        <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-        <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
-        <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-        <script src="~/Scripts/jquery.dataTables.min.js"></script>
-        <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-        <script src="~/Scripts/bootstrap-tagsinput.js"></script>
-        <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-        <script src="~/Scripts/jasny-bootstrap.min.js"></script>
-        <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-        <script src="~/Scripts/fullcalendar.min.js"></script>
-        <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-        <script src="~/Scripts/jquery-jvectormap.js"></script>
-        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-        <script src="~/Scripts/nouislider.min.js"></script>
-        <!--  Google Maps Plugin    -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-        <!-- Chart JS -->
-        <script src="~/Scripts/chartjs.min.js"></script>
-        <!--  Notifications Plugin    -->
-        <script src="~/Scripts/bootstrap-notify.js"></script>
-        <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="~/Scripts/now-ui-dashboard.min.js?v=1.4.1" type="text/javascript"></script>
-        <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-        <script src="~/Scripts/demo.js"></script>
-        <script>
-            $(document).ready(function () {
-                // Javascript method's body can be found in assets/js/demos.js
-                demo.initDashboardPageCharts();
+    <!--   Core JS Files   -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="~/Scripts/bootstrap-switch.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="~/Scripts/sweetalert2.min.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="~/Scripts/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="~/Scripts/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="~/Scripts/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="~/Scripts/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="~/Scripts/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="~/Scripts/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/Scripts/nouislider.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+    <script src="~/Scripts/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="~/Scripts/bootstrap-notify.js"></script>
+    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/Scripts/now-ui-dashboard.min.js?v=1.4.1" type="text/javascript"></script>
+    <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+    <script src="~/Scripts/demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
 
-                demo.initVectorMap();
+            demo.initVectorMap();
 
-            });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
