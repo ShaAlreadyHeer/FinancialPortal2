@@ -50,6 +50,7 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                budgetItem.Created = DateTime.Now;
                 db.BudgetItems.Add(budgetItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
