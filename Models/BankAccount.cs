@@ -18,8 +18,6 @@ namespace FinancialPortal.Models
         public double CurrentBalance { get; set; }
         public double LowBalanceThreshold { get; set; }
 
-        public virtual Household Household { get; set; }
-        public virtual ApplicationUser Owner { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
 
         public BankAccount()

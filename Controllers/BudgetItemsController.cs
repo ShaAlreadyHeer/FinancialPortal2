@@ -50,6 +50,8 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                budgetItem.Description = budgetItem.Description;
+                budgetItem.CurrentAmount = budgetItem.CurrentAmount;
                 budgetItem.Created = DateTime.Now;
                 db.BudgetItems.Add(budgetItem);
                 db.SaveChanges();

@@ -62,7 +62,7 @@ namespace FinancialPortal.Models
 
         public System.Data.Entity.DbSet<FinancialPortal.Models.Budget> Budgets { get; set; }
 
-        public System.Data.Entity.DbSet<FinancialPortal.Models.BankAccount> BankAccounts { get; set; }
+        public System.Data.Entity.DbSet<FinancialPortal.Models.BankAccount> BankAccount { get; set; }
 
         public System.Data.Entity.DbSet<FinancialPortal.Models.BudgetItem> BudgetItems { get; set; }
 

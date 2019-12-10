@@ -18,27 +18,29 @@ namespace FinancialPortal.Controllers
         // GET: BankAccounts
         public ActionResult Index()
         {
-            return View(db.BankAccounts.ToList());
+            return View(db.BankAccount.ToList());
         }
 
         // GET: BankAccounts/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
-            if (bankAccount == null)
+            BankAccount bankAccounts = db.BankAccount.Find(id);
+            if (bankAccounts == null)
             {
                 return HttpNotFound();
             }
-            return View(bankAccount);
+            return View(bankAccounts);
         }
 
         // GET: BankAccounts/Create
         public ActionResult Create()
         {
+            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "Name");
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName");
             return View();
         }
 
@@ -51,6 +53,7 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                bankAccount.HouseholdId = bankAccount.HouseholdId;
                 bankAccount.AccountType = bankAccount.AccountType;
                 bankAccount.StartingBalance = bankAccount.StartingBalance;
                 bankAccount.CurrentBalance = bankAccount.CurrentBalance;
@@ -58,7 +61,7 @@ namespace FinancialPortal.Controllers
                 bankAccount.OwnerId = User.Identity.GetUserId();
                 bankAccount.Created = DateTime.Now;
                 user.BankAccount = bankAccount;
-                db.BankAccounts.Add(bankAccount);
+                db.BankAccount.Add(bankAccount);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -73,7 +76,7 @@ namespace FinancialPortal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
+            BankAccount bankAccount = db.BankAccount.Find(id);
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -104,7 +107,7 @@ namespace FinancialPortal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
+            BankAccount bankAccount = db.BankAccount.Find(id);
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -117,8 +120,8 @@ namespace FinancialPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            BankAccount bankAccount = db.BankAccounts.Find(id);
-            db.BankAccounts.Remove(bankAccount);
+            BankAccount bankAccount = db.BankAccount.Find(id);
+            db.BankAccount.Remove(bankAccount);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

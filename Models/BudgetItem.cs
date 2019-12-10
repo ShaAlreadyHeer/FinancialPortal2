@@ -15,8 +15,6 @@ namespace FinancialPortal.Models
         public string Description { get; set; }
         public float TargetAmount { get; set; }
         public float CurrentAmount { get; set; }
-
-        public virtual Budget Budget { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public BudgetItem()
         {

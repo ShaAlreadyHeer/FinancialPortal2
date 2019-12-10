@@ -9,8 +9,9 @@ namespace FinancialPortal.Enum
     {
         public enum TransType
         {
-        withdrawal,
-        Deposit
+        Withdrawal,
+        Deposit,
+        Payment,
         }
     }
 
